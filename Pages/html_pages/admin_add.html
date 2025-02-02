@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Candidate</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      .container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 60%;
+        margin: 50px auto;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+      }
+      label {
+        margin-bottom: 5px;
+        color: #555;
+      }
+      input,
+      button {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .candidate_box {
+        height: 10rem;
+        margin-top: 20px;
+        background: #e9ecef;
+        padding: 10px;
+        border-radius: 8px;
+        overflow: scroll;
+      }
+      .candidate_box h2 {
+        text-align: center;
+      }
+      #display_candidates {
+        color: rgb(10, 73, 126);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Add Candidate</h1>
+      <form id="addCandidateForm">
+        <label for="candidateName">Candidate Name:</label>
+        <input
+          type="text"
+          id="candidateName"
+          name="candidateName"
+          placeholder="Enter candidate's name"
+          required
+          autofocus
+        />
+
+        <label for="party">Party:</label>
+        <input
+          type="text"
+          id="party"
+          name="party"
+          placeholder="Enter party name"
+          required
+        />
+
+        <button onclick="clicked(event)">Add Candidate</button>
+      </form>
+      <div class="candidate_box" id="candidate_box">
+        <h2>Candidate List</h2>
+        <div id="display_candidates"></div>
+      </div>
+    </div>
+    
+    <script>
+      let original_data = [];
+      let create_vote_count_data = [];
+      const display_candidates = document.getElementById("display_candidates");
+      let message = document.createElement("h4");
+      
+      get_value_from_DB();
+      display_config();
+
+      function get_value_from_DB() {
+        let temp = JSON.parse(localStorage.getItem("candidates"));
+        let temp1 = JSON.parse(localStorage.getItem("vote_count"));
+        if (temp != null && temp1 != null) {
+          let i = 0;
+          while (i < temp.length) {
+            original_data.push(temp[i]);
+            create_vote_count_data.push(temp1[i]);
+            i++;
+          }
+        }else{
+          message.style.textAlign = "center";
+          message.style.marginTop = "40px";
+          message.textContent = "NO DATA FOUND";
+          display_candidates.append(message);
+        }
+      }
+
+
+      function display_config() {
+        for (let i = 0; i < original_data.length; i++) {
+          message = document.createElement("h4");
+          message.textContent = `Name: ${original_data[i].candidate_name}    ||    Party: ${original_data[i].party_name}    ||    ID: ${original_data[i].id_name}`;
+          display_candidates.appendChild(message);
+        }
+      }
+      function post_data_to_DB(data_value,vote_count_data) {
+        localStorage.setItem("candidates", JSON.stringify(data_value));
+        localStorage.setItem("vote_count",JSON.stringify(vote_count_data));
+      }
+
+      function clicked(event) {
+        event.preventDefault(); // Prevents form from reloading the page
+
+        let element = null;
+
+        let local_data = {
+          candidate_name: null,
+          party_name: null,
+          id_name: null,
+        };
+
+        let local_data_one = {
+          "name": null,
+          "count": 0
+        };
+
+        const candidateName = document.getElementById("candidateName").value;
+        const party = document.getElementById("party").value;
+
+        if (candidateName && party) {
+          local_data.candidate_name = candidateName.toLocaleUpperCase();
+          local_data.party_name = party.toLocaleUpperCase();
+          local_data.id_name = "C00" + (original_data.length + 1); // Manually Asign this
+          
+          // check Duplicates
+          let check_candidate_duplicates = function(name){
+            for (let i = 0; i < original_data.length; i++) {
+              if((original_data[i].candidate_name.toLocaleUpperCase()) === (candidateName.toLocaleUpperCase())){
+                return false
+              }
+            }
+            return true;
+          }
+          let check_party_duplicates = function(party){
+            for (let i = 0; i < original_data.length; i++) {
+              if((original_data[i].party_name.toLocaleUpperCase()) === (party.toLocaleUpperCase())){
+                return false
+              }
+            }
+            return true;
+          }
+          
+          if(check_candidate_duplicates(candidateName) && check_party_duplicates(party)){
+            local_data_one.name = local_data.candidate_name;
+
+            create_vote_count_data.push({...local_data_one});
+            original_data.push({...local_data});
+
+            post_data_to_DB(original_data,create_vote_count_data);
+
+            location.reload();
+          }else{
+            alert("Duplicates Found")
+          }
+
+        } else {
+          alert("Please Fill Up The Form");
+        }
+      }
+    </script>
+  </body>
+</html>

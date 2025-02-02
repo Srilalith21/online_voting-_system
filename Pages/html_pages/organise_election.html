@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Candidate</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      .container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 60%;
+        margin: 50px auto;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+      }
+      label {
+        margin-bottom: 5px;
+        color: #555;
+      }
+      input,
+      button {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Organise Election</h1>
+      <form id="organise_election">
+        <label>Election Date</label>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          placeholder="Enter Date"
+          required
+        />
+
+        <label>Enter Type Of Election</label>
+        <input
+          type="text"
+          id="context"
+          name="context"
+          placeholder="eg: MP election"
+          required
+        />
+        <button onclick="clicked()">Organise</button>
+      </form>
+    </div>
+
+    <script>
+
+      let original_data = []
+
+      function post_data_to_DB(data_value){
+        localStorage.setItem("election_date",JSON.stringify(data_value))
+      }
+
+      function clicked(){
+        event.preventDefault()
+
+        const date = document.getElementById("date").value
+        const context = document.getElementById("context").value
+        
+        if(toString(date) != "" && context != ""){
+          let data = {
+            "date" : `${date}`,
+            "type_of_election" : `${context}`
+          }
+          original_data.push({...data})
+          post_data_to_DB(original_data)
+          alert("Successfully Created")
+        }
+      }
+
+    </script>
+  </body>
+</html>

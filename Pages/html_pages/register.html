@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css_and_js/register_style.css">
+    <title>Register</title>
+</head>
+    <body onload="get_data_from_DB()">
+        
+        <div class="container">
+            <h1>Register</h1>
+            <form id="register_form">
+                <p><input type="text" placeholder="voter id" id="#voterid" required autofocus></p>
+                <p><input type="text" placeholder="addhar number" id="#addhar" required></p>
+                <p><input type="text" placeholder="mobile number" id="#number" required></p>
+                <p><input type="text" placeholder="username" id="#username" required></p>
+                <p><input type="password" placeholder="password" id="#password" required></p>
+                <button onclick="clicked()">Submit</button><br>
+                <button type="reset" class="reset">Reset</button>
+            </form>
+        </div>
+
+        <script src="../css_and_js/register_main.js"></script>
+    </body>
+</html>
+

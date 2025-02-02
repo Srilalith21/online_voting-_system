@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin</title>
+        <link rel="stylesheet" href="../css_and_js/admin_style.css">
+    </head>
+    <body>
+        <div class="side_bar" id="#side_bar">
+            <p><a href="./admin_add.html">Add Candidates</a></p>
+            <hr>
+            <p><a href="./admin_delete.html">Delete Candidates</a></p>
+            <hr>
+            <p><a href="organise_election.html">Organise Election</a></p>
+            <hr>
+            <p><a href="results.html">Publish Results</a></p>
+            <hr>
+            <p><a href="../../Main_Pages/main.html">Voters Page</a></p>
+            <hr>
+            <p><a href="#" onclick="admin_logout()">Logout</a></p>
+            <hr>
+        </div>
+        <div class="main_page">
+            <div class="header">
+                <div class="img_div">
+                    <img src="../../images/navigation_bar_icon.png" alt="navigation bar" id="#img" onclick="activate_evt()">
+                </div>
+                <div class="heading_div">
+                    <h1 style="font-family: Arial; color: #ffffff;">ADMIN</h1>
+                </div>
+            </div>
+
+            <div class="content" id="#content">
+                <h2 style="text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; margin-top: 10px;">Candidates</h2>
+                <div class="candidate_data_div" id="#candidate_data_div"></div>
+                
+                <div class="candidate_data_table_div" id="#candidate_data_table_div">
+                    <div class="heading_table">
+                        <h2>Upcomming Elections</h2>
+                    </div>
+
+                    <div class="table_div" id="table_div">
+                        <table border="1" id="table">
+                            <thead>
+                                <tr>
+                                    <td id="t_date">DATE</td>
+                                    <td id="t_date">TYPE OF ELECTION</td>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_el">
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="footer"></div>
+        </div>
+
+        <script src="../css_and_js/admin.js"></script>
+    </body>
+</html>

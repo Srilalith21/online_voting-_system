@@ -1,0 +1,195 @@
+*::selection{
+    background-color: #0000ff;
+    color: #f5f5f5;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.side_bar{
+    height: 87%;
+    width: 20%;
+    margin-top: 4.5rem;
+    background-color: #9bafd1;
+    position: absolute;
+    transition: 600ms;
+    right: 100%;
+}
+
+.side_bar p{
+    text-align: center;
+    margin: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.side_bar p a{
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
+}
+
+.main_page{
+    height: 100vh;
+    width: 100%;
+    background-color: #edf3ff;
+}
+
+.header{
+    height: 4.5rem;
+    width: 100%;
+    background-color:  #6182bb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.img_div{
+    height: 2.5rem;
+    width: 4rem;
+}
+
+.img_div img{
+    height: 2.5rem;
+    width: 2.5rem;
+    padding-left: 10px;
+}
+
+.img_div img:hover{
+    border-radius: 40px;
+    background-color: rgb(65, 114, 219);
+    cursor: pointer;
+}
+
+.heading_div{
+    height: 2.5rem;
+    width: 7rem;
+}
+
+.heading_div h1{
+    margin-top: 0px;
+}
+
+.help_div{
+    height: 2.5rem;
+    width: 4rem;
+}
+
+.heading_div a{
+    padding-right: 10px;
+}
+
+.content{
+    height: 86.5%;
+    width: 100%;
+    background-color: #edf3ff;
+}
+
+.content h1{
+    font-family: monospace;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.candidate_data_div{
+    height: 17rem;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 10%;
+    background-color: #c3d1ee;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+    margin-top: 1%;
+    border-radius: 8px;
+    border-top: 0.1px solid black;
+    border-bottom: 7px solid black;
+}
+
+.candidate{
+    margin: 20px;
+    height: 10rem;
+    width: 10rem;
+    font-family: monospace;
+    border-radius: 10px;
+    border-bottom: 3px solid blue;
+    border-right: 3px solid blue;
+    cursor: pointer;
+}
+
+.candidate:hover{
+    height: 11rem;
+    width: 11rem;
+    transition: 250ms;
+    border-bottom: 3px transparent;
+    border-right: 3px transparent;
+    color: #edf3ff;
+}
+
+.candidate .p_name{    
+    text-align: center;
+    margin-top: 40px;
+    font-size: x-large;
+    font-weight: 900;
+}
+
+.candidate .p_name .p_party{
+    text-align: center;
+    margin-top: 20px;
+    font-size: x-large;
+    font-weight: 600;
+}
+
+.candidate_data_table_div{
+    height: 15rem;
+    width: 70%;
+    background-color: #e4e4e4;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 10px;
+    overflow-y  : scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border-top: 1px solid #000;
+    border-bottom: 7px solid #000;
+}
+
+.heading_table h2{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-bottom: 30px;
+}
+
+.table_div{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding: 5px;
+}
+
+#table{
+    height: 100px;
+    width: 25rem;
+    border: 2px solid rgb(24, 0, 241);
+    border-radius: 6px;
+}
+
+#t_date{
+    color: red;
+    font-weight: 600;
+}
+
+#table td{
+    padding: 5px;
+}

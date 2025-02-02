@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+</head>
+<style>
+    body {
+        height: 100vh;
+        width: 100%;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content {
+        height: 10rem;
+        width: 20rem;
+        /* background-color: red; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content header h1 {
+        text-align: center;
+    }
+
+    .content p {
+        font-size: larger;
+    }
+
+    .content main input {
+        width: 10px;
+    }
+
+    input {
+        width: 20pc;
+        height: 25px;
+        text-align: center;
+        font-family: monospace;
+        font-weight: 900;
+        color: red;
+    }
+
+    button {
+        height: 30px;
+        width: 80px;
+        border-radius: 7px;
+        color: red;
+    }
+</style>
+
+<body>
+
+    <div class="content">
+        <div class="header">
+            <h1>ADMIN</h1>
+        </div>
+        <div class="main">
+            <p><label>Username : <input type="text" autofocus required id="#admin_name"></label></p>
+            <p><label>Password : <input type="password" required id="#admin_password"></label></p>
+            <p style="text-align: center;"><button type="submit" onclick="navigate()">Login</button></p>
+        </div>
+    </div>
+
+    <script>
+        
+        let val = [];
+
+        function get_values_from_DB(){
+            let temp = JSON.parse(localStorage.getItem("admin"));
+            if(temp != null && temp[0] != null){
+                val = temp;
+            }else{
+                let arr = ["Administrator","Admin@01001"];
+                localStorage.setItem("admin",JSON.stringify(arr));
+                val = JSON.parse(localStorage.getItem("admin"));
+            }
+        }   
+        function navigate() {
+            get_values_from_DB();
+            let admin_name = document.getElementById('#admin_name').value
+            let admin_password = document.getElementById('#admin_password').value
+            if (admin_name == val[0] && admin_password == val[1]) {
+                window.location.href = "admin.html"
+            } else {
+                alert("invalid")
+            }
+            localStorage.removeItem("admin");
+        }
+    </script>
+</body>
+
+</html>

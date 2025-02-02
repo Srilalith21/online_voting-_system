@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css_and_js/login_style.css">
+        <title>Login</title>
+    </head>
+    <body onload="get_data_from_DB()">
+        <div class="page">
+            <div class="container">
+                <h1 style="font-family: Arial;">Login</h1>
+                <form action="#">
+                    <p><input type="text" placeholder="username" autofocus id="#username" autofocus required autocomplete="off"></p>
+                    <p><input type="password" placeholder="password" id="#password" required></p>
+                </form>
+                <div class="button_div">
+                    <button id="#submit" onclick="clicked()">Login</button>
+                </div> 
+                <div class="links_div">
+                    <a href="#" onclick="admin_clicked()">Admin</a>
+                </div>
+            </div>
+        </div>
+        <script src="../css_and_js/login_script.js"></script>
+    </body>
+</html>

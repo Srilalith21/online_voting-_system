@@ -1,0 +1,51 @@
+body{
+  margin: 0;
+  padding: 0;
+  background-image: url("../../images/emblem_background.jpg");
+  background-size: cover;
+  color: #ffffff;
+  font-family: sans-serif;
+}
+.page{
+  height: 500pt;
+  width: 100%;
+  background-color: hsla(0, 0%, 0%, 0.767);
+  transition: 3s;
+  
+}
+.nav{
+  height: 4.5rem;
+  background-color: rgba(0, 0, 0, 0.61);
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav h1{
+  width: 40%;
+  margin-left: 20px;
+}
+.nav .right{
+  width: 15%;
+}
+.nav a{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #ffffff;
+  margin-right: 20px;
+  font-size: large;
+  text-decoration: none;
+  transition: 400ms;
+}
+.nav a:hover{
+  border-bottom: 2px solid red;
+}
+.content{
+  position: relative;
+  top: 33%;
+}
+.content h3{
+  text-align: center;
+}
+.content p{
+  text-align: center;
+}

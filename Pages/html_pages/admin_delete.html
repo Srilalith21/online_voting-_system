@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Candidate</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      .container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 60%;
+        margin: 50px auto;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+      }
+      label {
+        margin-bottom: 5px;
+        color: #555;
+      }
+      input,
+      button {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #a71d2a;
+      }
+      .display_box_div {
+        margin-top: 20px;
+        background: #e9ecef;
+        padding: 10px;
+        border-radius: 8px;
+      }
+      .display_box_div h2 {
+        text-align: center;
+        color: #000000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Delete Candidate</h1>
+      <form id="deleteCandidateForm">
+        <label for="candidateName">Candidate Name:</label>
+        <input
+          type="text"
+          id="candidateName"
+          name="candidateName"
+          placeholder="Enter candidate's name to delete"
+          required
+        />
+
+        <button type="submit" id="delete">Delete Candidate</button>
+      </form>
+    </div>
+
+    <script>
+      
+      let original_data = [];
+      let vote_count_data = [];
+
+      get_value_from_DB();
+
+      function get_value_from_DB() {
+        let temp = JSON.parse(localStorage.getItem("candidates"));
+        let temp1 = JSON.parse(localStorage.getItem("vote_count"));
+        if (temp != null) {
+          let i = 0;
+          while (i < temp.length) {
+            original_data.push(temp[i]);
+            vote_count_data.push(temp1[i]);
+            i++;
+          }
+        }
+      }
+      
+      function post_data_to_DB(data_value,vote_count) {
+        localStorage.setItem("candidates", JSON.stringify(data_value));
+        localStorage.setItem("vote_count",JSON.stringify(vote_count));
+      }
+
+      function find_index_of(value) {
+        let index = -1;
+        for (let i = 0; i < original_data.length; i++) {
+          if (original_data[i].candidate_name === value.toLocaleUpperCase()) {
+            index = i;
+            break;
+          }
+        }
+        return index;
+      }
+
+      function delete_candidate_from_DB(data_val) {
+        let index = find_index_of(data_val);
+        if (index >= 0) {
+          for (let i = index; i < original_data.length - 1; i++) {
+            original_data[i] = original_data[i + 1];
+            vote_count_data[i] = vote_count_data[i + 1];
+          }
+          original_data.pop();
+          vote_count_data.pop();
+          post_data_to_DB(original_data,vote_count_data);
+          alert("Deleted")
+        } else {
+          alert("no candidate found");
+        }
+      }
+
+      document.getElementById("delete").onclick = function (event) {
+        event.preventDefault(); // Prevents form from reloading the page
+        const candidateName = document.getElementById("candidateName").value;
+        if (candidateName) {
+          // Defination
+          delete_candidate_from_DB(candidateName);
+          // Reset the form
+          document.getElementById("deleteCandidateForm").reset();
+        } else {
+          alert("Please enter the candidate name.");
+        }
+      };
+    </script>
+  </body>
+</html>
